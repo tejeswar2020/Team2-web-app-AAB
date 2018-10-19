@@ -1,5 +1,37 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
+<!DOCTYPE HTML>
+<HTML>
+   <head>
+       <meta charset="UTF-8">
+       <title>User Details</title>
+       <style>
+           header{
+                background-color: #F5F5F5;
+                padding: 20px;
+                text-align: left;
+                font-size: 25px;
+                color: black;
+                }
+           form{
+               
+           }
+       </style>
+    </head>
+    <body>
+        <header>
+        <h1>Welcome,</h1>
+        <h3>Enter Your Details to Register</h3>
+        </header>
+        <form action="servlet_name" method="get">
+            User Name <input type = "text" name = "user_name"  /> <br />
+            First Name <input type = "text" name = "f_name"  /> <br />
+            Last Name <input type = "text" name = "l_name"  /> <br />
+            Age <input type = "text" name = "age"  /> <br />
+            Email ID <input type = "email" name = "emailaddr"  /> <br />
+            Password <input type = "password" name = "pass"  /> <br />
+            Gender <br><input type="radio" name="gender" value="male">Male<br>
+                    <input type="radio" name="gender" value="female">Female<br>
+                    <input type="radio" name="gender" value="other">Other
+                    <input type = "submit" name = "Register"  />
+        </form>
+    </body>
+</HTML>
