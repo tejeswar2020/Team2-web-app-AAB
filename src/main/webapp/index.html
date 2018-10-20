@@ -2,8 +2,13 @@
 <HTML>
    <head>
        <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
        <title>User Details</title>
        <style>
+           body
+           {
+               background-color:#fffff7;
+           }
            header{
                 background-color: #F5F5F5;
                 padding: 20px;
@@ -12,7 +17,41 @@
                 color: black;
                 }
            form{
+               background-color: #fffff7;
+                padding: 20px;
+                text-align: left;
+                font-size: 25px;
+                color: black;
+                display: table;
+                }
+           label{
+               display: table-cell; 
+                }
+            input {
+                height: 30px;
+                display: table-cell; 
+                }
+                p{
+                display:table-row;
+                }
+           input[type=submit]{
+               display:table-row;
+                border-radius: 5px;
+                border-width: 2px;
+                border-color: black;
+                width: 100px;
+                height:25px;
+           }
+           input[type=radio]{
+               -ms-transform: scale(0.5); /* IE 9 */
+                -webkit-transform: scale(0.5); /* Chrome, Safari, Opera */
+                    transform: scale(0.5);
+           }
+           p1
+           {
                
+               padding: 0;
+               font-size: 20px;
            }
        </style>
     </head>
@@ -21,17 +60,17 @@
         <h1>Welcome,</h1>
         <h3>Enter Your Details to Register</h3>
         </header>
-        <form action="servlet_name" method="get">
-            User Name <input type = "text" name = "user_name"  /> <br />
-            First Name <input type = "text" name = "f_name"  /> <br />
-            Last Name <input type = "text" name = "l_name"  /> <br />
-            Age <input type = "text" name = "age"  /> <br />
-            Email ID <input type = "email" name = "emailaddr"  /> <br />
-            Password <input type = "password" name = "pass"  /> <br />
-            Gender <br><input type="radio" name="gender" value="male">Male<br>
-                    <input type="radio" name="gender" value="female">Female<br>
-                    <input type="radio" name="gender" value="other">Other
-                    <input type = "submit" name = "Register"  />
+        <form action="UserDetails" method="get">
+           <p> <label>User Name </label> <input type = "text" name = "user_name"  /></p> <br />
+            <p><label>First Name </label><input type = "text" name = "f_name"  /></p> <br />
+            <p><label>Last Name </label> <input type = "text" name = "l_name"  /></p> <br />
+            <p><label>Age </label>       <input type = "text" name = "age"  /></p> <br />
+            <p><label>Email ID </label>  <input type = "email" name = "emailaddr"  /></p> <br />
+            <p><label>Password </label>  <input type = "password" name = "pass"  /></p> <br />
+            <p><label>Gender</label></p><p><label><input type="radio" name="gender" value="male">Male<br>
+            <input type="radio" name="gender" value="female">Female<br>
+            <input type="radio" name="gender" value="other">Other</label></p><br>
+                    <input type = "submit" name = "submit" value="Register">
         </form>
     </body>
 </HTML>

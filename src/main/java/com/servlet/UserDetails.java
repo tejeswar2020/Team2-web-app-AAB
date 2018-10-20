@@ -1,6 +1,12 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +17,34 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class UserDetails
  */
 public class UserDetails extends HttpServlet {
+	String JDBC_DRIVER = "";
+	String DB_URL = "";
+	String USER = "root";
+	String PASS = "abiramroot";
+	Connection conn = null;
+	Statement stmt = null;
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserDetails() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		// TODO Auto-generated method stub
+		JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+		DB_URL = "jdbc:mysql://localhost/COMPANY";
+		try {
+		Class.forName(JDBC_DRIVER);
+		//Open a connection
+	    System.out.println("Connecting to database...");
+	    conn = DriverManager.getConnection(DB_URL, USER, PASS);
+	    stmt = conn.createStatement();
+	    System.out.println("Connected to database.");
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+
 	}
 
 	/**
@@ -33,7 +52,29 @@ public class UserDetails extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String user_name = request.getParameter("user_name");
+		
+		String f_name = request.getParameter("f_name");
+		String l_name =request.getParameter("l_name");
+		int age = Integer.parseInt(request.getParameter("age"));
+		String emailaddr =request.getParameter("emailaddr");
+		String pass = request.getParameter("pass");
+		String gender = request.getParameter("gender");
+		System.out.println(user_name+" "+f_name+" "+l_name + " " + age+" "+emailaddr+" "+pass+" "+gender);
+		ResultSet rs;
+		String query1 = "INSERT INTO USERS VALUES(\""+user_name+"\",\""+f_name+"\",\""+l_name+"\","+age+",\""+emailaddr+"\",\""+pass+"\",\""+gender+"\");";
+		
+		try
+		{
+			stmt.executeUpdate(query1);
+			rs = stmt.executeQuery("Select * from USERS");
+			while(rs.next())
+				System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+"  "+rs.getInt(4)+"  "+rs.getString(5)+"  "+rs.getString(6)+"  "+rs.getString(7));
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}	
 	}
 
 	/**
