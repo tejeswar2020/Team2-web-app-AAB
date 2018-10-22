@@ -53,8 +53,23 @@ public class UserDetails extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String user_name = request.getParameter("user_name");
 		
+
+		String user_name = request.getParameter("user_name");
+		String check = "Select * from USERS where username = \""+user_name+"\";";
+		try {
+			ResultSet r = stmt.executeQuery(check);
+			if(r.next()) {
+			if (r.getString(1).equals(user_name)) {
+				System.out.println("User Name already exists.. please use a different name");
+				request.getRequestDispatcher("/index.html").forward(request, response);
+				return;
+			}
+			}
+		} catch (SQLException e1) {
+			System.out.println("Check failed..");
+			e1.printStackTrace();
+		}
 		String f_name = request.getParameter("f_name");
 		String l_name =request.getParameter("l_name");
 		int age = Integer.parseInt(request.getParameter("age"));
@@ -74,7 +89,8 @@ public class UserDetails extends HttpServlet {
 		} catch (SQLException e) 
 		{
 			e.printStackTrace();
-		}	
+		}
+
 	}
 
 	/**
